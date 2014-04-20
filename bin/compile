@@ -28,6 +28,6 @@ mv $CACHE_DIR/$ARCHIVE_NAME $BUILD_DIR/vendor/phantomjs
 echo "-----> Building runtime environment"
 mkdir -p $BUILD_DIR/.profile.d
 
-cat <<EOF > $BUILD_DIR/.profile.d/$BUILDPACK_NAME.sh
-PATH=$PATH:/app/vendor/phantomjs
+cat <<EOF > $BUILD_DIR/.profile.d/phantomjs.sh
+export PATH="$HOME/vendor/phantomjs/bin:$PATH"
 EOF
