@@ -6,17 +6,25 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 # config
-VERSION="1.9-webfonts"
+VERSION="2.0.1"
 
 # Buildpack URL
 ARCHIVE_NAME=phantomjs-${VERSION}-linux-x86_64
 FILE_NAME=${ARCHIVE_NAME}.tar.bz2
 BUILDPACK_PHANTOMJS_PACKAGE=https://s3.amazonaws.com/represent-misc/${FILE_NAME}
+EXPECTED_SHASUM=2f61db6a176d89f536e1f74ed4a1d1a3160d2cf6
 
 mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
   echo "-----> Fetching PhantomJS ${VERSION} binaries at ${BUILDPACK_PHANTOMJS_PACKAGE}"
   curl $BUILDPACK_PHANTOMJS_PACKAGE -L -s -o $CACHE_DIR/$FILE_NAME
+fi
+
+echo "-----> Verifying integrity"
+ACTUAL_SHASUM=$(shasum $CACHE_DIR/$FILE_NAM | tr -s ' ' | cut -d' ' -f1)
+if  ! [ "$EXPECTED_SHASUM" = "$ACTUAL_SHASUM" ]; then
+    echo "SHA checksum $ACTUAL_SHASUM doesn't match the expectation!"
+    return 1
 fi
 
 echo "-----> Extracting PhantomJS ${VERSION} binaries to ${BUILD_DIR}/vendor/phantomjs"
