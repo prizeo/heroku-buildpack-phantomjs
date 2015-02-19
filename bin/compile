@@ -21,7 +21,7 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
 fi
 
 echo "-----> Verifying integrity"
-ACTUAL_SHASUM=$(shasum $CACHE_DIR/$FILE_NAME | tr -s ' ' | cut -d' ' -f2)
+ACTUAL_SHASUM=$(shasum $CACHE_DIR/$FILE_NAME | tr -s ' ' | cut -d' ' -f1)
 if  ! [ "$EXPECTED_SHASUM" = "$ACTUAL_SHASUM" ]; then
     echo "SHA checksum $ACTUAL_SHASUM doesn't match the expectation!"
     return 1
