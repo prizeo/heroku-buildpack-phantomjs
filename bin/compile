@@ -6,13 +6,13 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 # config
-VERSION="2.0.1-patched-2"
+VERSION="2.0.1-patched-3"
 
 # Buildpack URL
 ARCHIVE_NAME=phantomjs-${VERSION}-linux-x86_64
 FILE_NAME=${ARCHIVE_NAME}.tar.bz2
 BUILDPACK_PHANTOMJS_PACKAGE=https://s3-us-west-2.amazonaws.com/represent-com-misc/${FILE_NAME}
-EXPECTED_SHASUM=8776d657d171248c7802cff1116f8f1f7fe21db1
+EXPECTED_SHASUM=2bdf8ea5b0619de492af4f7addc7d1446ea839ad
 
 mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
